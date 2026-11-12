@@ -1,9 +1,9 @@
 title: "Yurui Zou"
-description: "Undergraduate student in automation in University of Science and Technology of China; Ph.D. candidate in Computer Science at City University of Hong Kong"
+description: "Undergraduate student in Automation at the University of Science and Technology of China"
 url: "https://yuruizou.github.io"
 baseurl: ""
 lang: "en"
-timezone: "Asia/Hong_Kong"
+timezone: "Asia/Shanghai"
 
 markdown: kramdown
 permalink: pretty
@@ -11,8 +11,6 @@ permalink: pretty
 navigation:
   - title: "Publications"
     url: "/publications/"
-  - title: "Teaching"
-    url: "/teaching/"
 
 exclude:
   - Gemfile
@@ -21,3 +19,6 @@ exclude:
   - vendor
   - scripts
   - tests
+
+  - teaching.html
+  - 
