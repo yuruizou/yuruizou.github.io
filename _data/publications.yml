@@ -19,11 +19,13 @@ preprints:
     publication_date_iso: "2026-10-26"
     doi: "10.48550/arXiv.2610.35262"
     abstract: >-
-      We study conversational bandit learning with numerical feedback on items
-      and pairwise comparisons of key-terms. Our HyConUCB algorithm combines both
-      feedback sources to guide recommendations and conversational queries,
-      with theoretical regret guarantees and evaluation on synthetic and
-      real-world data.
+      Conversational bandits improve recommendations by actively querying users about key-terms to elicit their item preferences. 
+      However, existing methods typically assume homogeneous feedback for items and key-terms, using either absolute rewards or pairwise comparisons. 
+      In practice, item feedback often takes the form of clicks or ratings, while comparisons are more natural for key-terms. 
+      To address this gap, we study conversational generalized linear bandits with hybrid feedback, combining absolute item rewards and relative key-term comparisons. 
+      We propose Conversational UCB with Hybrid Feedback (HyConUCB), which constructs unified confidence bounds from heterogeneous feedback and adaptively selects key-term comparisons by balancing information gain and directional coverage. 
+      Through a refined regret analysis that jointly exploits both feedback sources, we establish a regret bound that improves upon reward-only and adapted dueling-only benchmarks. 
+      Experiments on synthetic and real-world datasets validate the effectiveness of our algorithm.
     links:
       - label: "arXiv"
         paper: true
