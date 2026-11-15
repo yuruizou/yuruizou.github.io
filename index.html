@@ -2,7 +2,6 @@
 layout: default
 permalink: /
 home: true
-description: "Qirun Zeng is a Ph.D. candidate in Computer Science at City University of Hong Kong, studying bandit learning, feedback design, and adversarial robustness."
 ---
 
 {% assign home = site.data.home %}
@@ -33,21 +32,5 @@ description: "Qirun Zeng is a Ph.D. candidate in Computer Science at City Univer
   <p class="section-action"><a href="{{ '/publications/' | relative_url }}">View all publications <span aria-hidden="true">→</span></a></p>
 </section>
 
-{% include news.html variant="compact" %}
+<!-- {% include news.html variant="compact" %}
 
-<section class="page-section" aria-labelledby="service-heading">
-  {% include section-heading.html title="Service" %}
-  <p class="service-role">Reviewer</p>
-  <dl class="service-list">
-    {% for item in home.service %}
-      <div>
-        <dt>{{ item.period }}</dt>
-        <dd>{{ item.detail | markdownify }}</dd>
-      </div>
-    {% endfor %}
-  </dl>
-</section>
-
-<section class="home-extras" aria-label="Programming">
-  {% include programming.html %}
-</section>

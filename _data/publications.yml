@@ -1,239 +1,33 @@
-# Each paper URL is defined once here. Badges with paper: true and News
-# references such as [link text][paper:werewolf] share that URL.
 venue_order:
-  - "NeurIPS"
-  - "ICML"
-  - "KDD"
-  - "EMNLP"
-  - "arXiv"
+  - "Preprint"
 
-metrics:
-  - scholar_key: "total_citations"
-    label: "Citations"
-  - scholar_key: "h_index"
-    label: "h-index"
-  - scholar_key: "i10_index"
-    label: "i10-index"
-  - publication_key: "conference"
-    label: "Conference papers"
-  - publication_key: "journal"
-    label: "Journal papers"
-  - publication_key: "preprints"
-    label: "Preprints"
-
-conference:
-  - id: "one-rounding-fits-all"
-    url: "https://dl.acm.org/doi/10.1145/3770855.3817696"
-    title: "One Rounding Fits All: Memory-Efficient Approximation Algorithms for Partition-Constrained Influence Maximization"
-    publication_date: "8 August 2026"
-    publication_date_iso: "2026-08-08"
-    doi: "10.1145/3770855.3817696"
-    abstract: >-
-      Influence Maximization (IM) problem aims to strategically identify a single set of influential individuals who can influence as many users as possible. It was first introduced in the context of viral marketing, where a company pays a small number of influencers to promote a product or service. Nevertheless, with the proliferation of modern social media platforms such as TikTok, real-world viral marketing scenarios have grown increasingly complex, generally requiring multiple sets of users to participate. To handle these scenarios, [Huang et al.](https://doi.org/10.14778/3705829.3705833) recently formulated these problems as a general partition-constrained IM problem (IM-PC) and simultaneously proposed a tight (1-1/e-ε)-approximation RAMP algorithm for IM-PC. Despite its strong theoretical guarantee, RAMP is often hindered by its prohibitive memory overhead, as it must maintain 1/ε intermediate subsets during rounding, and sample inefficiency caused by requiring an additional RR set collection exclusively for solution evaluation. To overcome these limitations, we propose RBwA, a memory-efficient and sample-efficient progressive sampling algorithm for IM-PC. At its core, we utilize rademacher average from statistical learning theory to directly estimate solution quality, thereby eliminating the need for additional validation sets and simultaneously reducing the number of rounding invocations to a single call. Furthermore, we also devise a memory-efficient rounding scheme called BwARound for coverage maximization subroutines, which only requires storing one fractional vector and takes maximal feasible steps rather than tiny ε-increments, thus yielding significant improvements in both space complexity and iteration count over the rounding component AMPRound of RAMP. Finally, extensive experiments on large-scale social networks demonstrate the effectiveness of our proposed RBwA and BwARound.
-    authors:
-      - name: "Qixin Zhang"
-        equal: true
-      - name: "Qirun Zeng"
-        me: true
-        equal: true
-      - name: "Hui Lu"
-      - name: "Pingchuan Ma"
-      - name: "Jinhang Zuo"
-      - name: "Renqiang Luo"
-      - name: "Yi Yu"
-      - name: "Dacheng Tao"
-    venue: "In Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining"
-    venue_group: "KDD"
-    links:
-      - label: "KDD'2026"
-        paper: true
-        type: "conference"
-      - label: "Code"
-        url: "https://github.com/qirunzeng/OneRound-IM"
-        type: "code"
-
-  - id: "werewolf"
-    url: "https://aclanthology.org/2026.findings-emnlp.2427"
-    title: "WEREWOLF: Reputation-Aware Red-Teaming for Self-Organizing LLM Multi-Agent Systems"
-    doi: "10.18653/2026.findings-emnlp.2427"
-    publication_date: "August 2026"
-    publication_date_iso: "2026-08"
-    abstract: >-
-      Self-organizing LLM-based multi-agent systems dynamically select agents and organize communication graphs for each query. While this adaptivity improves flexibility, it also creates a control-plane attack surface: a malicious agent may exploit this selection and organization process to preserve future access and influence over later tasks. We formulate the attacker as a reputation-aware Trojan agent that chooses when to behave constructively and when to disrupt the task. Under full reputation access, we prove the optimality of a threshold-based attack policy and show why persistent attacks require a survivability constraint. We then propose WEREWOLF, a primal-dual reinforcement learning attacker that learns attack timing under hidden reputation by maximizing task disruption subject to control-plane access loss. Across four self-organizing systems and three benchmarks, it reduces average accuracy from 72.3% to 25.8% with an 86.3% attack success rate, and retains control-plane exposure comparable to that of honest agents. 
-    authors:
-      - name: "Manhin Poon"
-      - name: "Qirun Zeng"
-        me: true
-      - name: "Xiangxiang Dai"
-      - name: "Jinhang Zuo"
-    venue: "In Findings of the Association for Computational Linguistics: EMNLP 2026"
-    venue_group: "EMNLP"
-    links:
-      - label: "EMNLP'2026"
-        paper: true
-        type: "conference"
-      - label: "Code"
-        url: "https://github.com/EntroShape/Attacking-the-MAS"
-        type: "code"
-
-  - id: "best-arm-hybrid-feedback"
-    url: "https://arxiv.org/abs/2605.05745"
-    pin_to_top: true
-    title: "Best Arm Identification in Generalized Linear Bandits via Hybrid Feedback"
-    publication_date: "7 May 2026"
-    publication_date_iso: "2026-05-07"
-    doi: "10.48550/arXiv.2605.05745"
-    abstract: >-
-      We study fixed-confidence best arm identification in generalized linear bandits under a hybrid feedback model: at each round, the learner may query either (i) absolute reward feedback from a single arm or (ii) relative (dueling) feedback from an arm pair, both governed by generalized linear models. We introduce a likelihood-ratio--based confidence sequence that unifies heterogeneous generalized linear observations and yields an explicit ellipsoidal confidence set under a self-concordance assumption. Building on this confidence set, we propose a hybrid Track-and-Stop algorithm that adaptively allocates queries by tracking a minimax-optimal design over a joint action space of arms and pairs. We establish δ-correctness and provide almost-sure asymptotic upper bounds on the stopping time. We further extend the framework to a cost-aware setting that accounts for heterogeneous acquisition costs across feedback modalities. Empirical experiments demonstrate that the proposed algorithms significantly improve sample efficiency over baseline methods.
-    authors:
-      - name: "Qirun Zeng"
-        me: true
-      - name: "Xuchuang Wang"
-      - name: "Jiayi Shen"
-      - name: "Xutong Liu"
-      - name: "Fang Kong"
-      - name: "Jinhang Zuo"
-    venue: "In Proceedings of the 40th Annual Conference on Neural Information Processing Systems"
-    venue_group: "NeurIPS"
-    links:
-      - label: "NeurIPS'2026"
-        paper: true
-        type: "conference"
-      - label: "Code"
-        url: "https://github.com/qirunzeng/HyTS-GLB"
-        type: "code"
-
-  - id: "adversarial-bandits-fake-data"
-    url: "https://arxiv.org/abs/2505.21938"
-    pin_to_top: true
-    title: "Practical Adversarial Attacks on Stochastic Bandits via Fake Data Injection"
-    publication_date: "28 May 2025"
-    publication_date_iso: "2025-05-28"
-    doi: "10.48550/arXiv.2505.21938"
-    abstract: >-
-      Adversarial attacks on stochastic bandits have traditionally relied on some unrealistic assumptions, such as per-round reward manipulation and unbounded perturbations, limiting their relevance to real-world systems. We propose a more practical threat model, Fake Data Injection, which reflects realistic adversarial constraints: the attacker can inject only a limited number of bounded fake feedback samples into the learner's history, simulating legitimate interactions. We design effective attack strategies under this model, explicitly addressing both magnitude constraints (on reward values) and temporal constraints (on when and how often data can be injected). Our theoretical analysis shows that these attacks can mislead a class of bandit algorithms into selecting a target arm in nearly all rounds while incurring only sublinear attack cost. Experiments on synthetic and real-world datasets validate the effectiveness of our strategies, revealing vulnerabilities in stochastic bandit algorithms under practical adversarial scenarios.
-    authors:
-      - name: "Qirun Zeng"
-        me: true
-      - name: "Eric He"
-      - name: "Richard Hoffmann"
-      - name: "Xuchuang Wang"
-      - name: "Jinhang Zuo"
-    venue: "In Proceedings of the 40th Annual Conference on Neural Information Processing Systems"
-    venue_group: "NeurIPS"
-    links:
-      - label: "NeurIPS'2026"
-        paper: true
-        type: "conference"
-      - label: "Code"
-        url: "https://github.com/qirunzeng/bandit-fake-data-injection"
-        type: "code"
-
-  - id: "fusing-reward-dueling"
-    url: "https://dl.acm.org/doi/10.5555/3780338.3782937"
-    title: "Fusing Reward and Dueling Feedback in Stochastic Bandits"
-    publication_date: "13 July 2025"
-    publication_date_iso: "2025-07-13"
-    doi: "10.5555/3780338.3782937"
-    abstract: >-
-      This paper investigates the fusion of absolute (reward) and relative (dueling) feedback in stochastic bandits, where both feedback types are gathered in each decision round. We derive a regret lower bound, demonstrating that an efficient algorithm may incur only the smaller among the reward and dueling-based regret for each individual arm. We propose two fusion approaches: (1) a simple elimination fusion algorithm that leverages both feedback types to explore all arms and unifies collected information by sharing a common candidate arm set, and (2) a decomposition fusion algorithm that selects the more effective feedback to explore the corresponding arms and randomly assigns one feedback type for exploration and the other for exploitation in each round. The elimination fusion experiences a suboptimal multiplicative term of the number of arms in regret due to the intrinsic suboptimality of dueling elimination. In contrast, the decomposition fusion achieves regret matching the lower bound up to a constant under a common assumption. Extensive experiments confirm the efficacy of our algorithms and theoretical results.
-    authors:
-      - name: "Xuchuang Wang"
-      - name: "Qirun Zeng"
-        me: true
-      - name: "Jinhang Zuo"
-      - name: "Xutong Liu"
-      - name: "Mohammad Hajiesmaili"
-      - name: "John C. S. Lui"
-      - name: "Adam Wierman"
-    venue: "In Proceedings of the 42nd International Conference on Machine Learning"
-    venue_group: "ICML"
-    links:
-      - label: "ICML'2025"
-        paper: true
-        type: "conference"
-      - label: "Code"
-        url: "https://github.com/qirunzeng/Fusing-Reward-and-Dueling"
-        type: "code"
-
-
-
-
+conference: []
 journal: []
 
-
-
 preprints:
-  - id: "offline-attacks-warm-start-bandits"
-    url: "https://arxiv.org/abs/2610.10000"
-    title: "Beyond Reward Suppression: Near-Optimal Offline Attacks on Warm-Start Bandits with Bounded Rewards"
-    publication_date: "7 October 2026"
-    publication_date_iso: "2026-10-07"
-    doi: "10.48550/arXiv.2610.10000"
-    abstract: >-
-      Adversarial attacks on bandits aim to mislead a learner toward a target arm while keeping the attack cost small. Existing attacks typically achieve this by suppressing non-target arms. In practice, however, manipulation such as fake reviews often directly promotes the target item. We study this gap through bounded offline attacks on warm-start bandits, where an attacker can inject only valid action-reward pairs into the warm-start history before deployment. We show that target promotion is not merely a heuristic: when the target arm lies near the lower reward boundary, any order-optimal-cost attack against UCB that makes it selected in nearly all online rounds must allocate a nonvanishing fraction of its cost to the target arm. We then design an attack that achieves the optimal sublinear cost and characterize its allocation between target promotion and non-target suppression. We further extend the attack to Thompson Sampling, ε-greedy, and a broader class of bandit algorithms. Experiments on real-world and synthetic data validate the effectiveness of our attacks.
-    authors:
-      - name: "Qirun Zeng"
-        me: true
-      - name: "Manhin Poon"
-      - name: "Xiangxiang Dai"
-      - name: "Qixin Zhang"
-      - name: "Jinhang Zuo"
-    venue: "arXiv preprint arXiv:2610.10000"
-    venue_group: "arXiv"
-    links:
-      - label: "arXiv"
-        paper: true
-        type: "preprint"
-      - label: "Code"
-        url: "https://github.com/qirunzeng/Attack-on-Bounded-Bandit"
-        type: "code"
-
-
   - id: "conversational-glb-hybrid-feedback"
-    url: "https://arxiv.org/abs/2610.35262"
     title: "Conversational Generalized Linear Bandits with Hybrid Feedback"
-    publication_date: "26 October 2026"
+    authors:
+      - name: "Yurui Zou"
+        me: true
+      - name: "Qirun Zeng"
+      - name: "Jinhang Zuo"
+    venue: "arXiv preprint, 2026"
+    venue_group: "Preprint"
+    url: "https://arxiv.org/abs/2610.35262"
+    publication_date: "October 26, 2026"
     publication_date_iso: "2026-10-26"
     doi: "10.48550/arXiv.2610.35262"
     abstract: >-
-      Conversational recommendation systems can learn user preferences through both item interactions and questions about key-terms. These interactions naturally produce different feedback: users click or rate items but may find it easier to compare key-terms. We model this setting using generalized linear bandits that combine item rewards with pairwise key-term feedback. Our algorithm, HyConUCB, integrates these observations into a common confidence bound and chooses comparisons to balance information gain with coverage of informative directions. An analysis using both observation types yields a regret guarantee that improves on reward-only and adapted dueling-only baselines. Evaluations with simulated data and real-world datasets demonstrate the benefits of this approach.
-    authors:
-      - name: "Yurui Zou"
-      - name: "Qirun Zeng"
-        me: true
-      - name: "Jinhang Zuo"
-    venue: "arXiv preprint arXiv:2610.35262"
-    venue_group: "arXiv"
+      We study conversational bandit learning with numerical feedback on items
+      and pairwise comparisons of key-terms. Our HyConUCB algorithm combines both
+      feedback sources to guide recommendations and conversational queries,
+      with theoretical regret guarantees and evaluation on synthetic and
+      real-world data.
     links:
       - label: "arXiv"
         paper: true
         type: "preprint"
-
-  - id: "improved-e-value-thresholds"
-    url: "https://arxiv.org/abs/2610.11186"
-    title: "Improved E-Value Thresholds with Applications to Multiple and Sequential Testing"
-    publication_date: "8 October 2026"
-    publication_date_iso: "2026-10-08"
-    doi: "10.48550/arXiv.2610.11186"
-    abstract: >-
-      E-values provide a flexible framework for statistical inference, but the universal threshold 1/α can be conservative when the null distribution has additional structure. We study how structural restrictions limit the worst-case concentration underlying Markov's inequality, using a nondecreasing density model to constrain tail allocation and an L-Lipschitz density model to control local concentration. The nondecreasing model gives the minimax rejection threshold, and the Lipschitz condition yields a sharper closed-form threshold with an O(L^-1/2) relative improvement over 1/α. We further show that this threshold is asymptotically sharp as α approaches zero, in the sense that no uniformly valid threshold can improve on it by a fixed positive L-dependent amount. We then incorporate the Lipschitz calibration into multiple testing procedures with FDR control and use the same structural information to construct calibrated conditional e-values for anytime-valid sequential inference. Numerical experiments illustrate the resulting gains in discoveries and the trade-offs of the sequential procedures.
-    authors:
-      - name: "Jiayi Shen"
-      - name: "Houzhen Liu"
-      - name: "Qirun Zeng"
-        me: true
-      - name: "Manhin Poon"
-      - name: "Weiqi Yang"
-      - name: "Qixin Zhang"
-      - name: "Weiwei Zhuang"
-    venue: "arXiv preprint arXiv:2610.11186"
-    venue_group: "arXiv"
-    links:
-      - label: "arXiv"
-        paper: true
-        type: "preprint"
-      - label: "Code"
-        url: "https://github.com/houzhenliu/e-LC"
-        type: "code"
-
+      - label: "PDF"
+        url: "https://arxiv.org/pdf/2610.35262"
+        type: "paper"

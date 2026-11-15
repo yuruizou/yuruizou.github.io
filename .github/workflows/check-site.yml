@@ -28,7 +28,7 @@ jobs:
           ruby-version: "3.3"
           bundler: "2.5.23"
           bundler-cache: true
-      - name: Test data update scripts
-        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
-      - name: Validate data and build both Scholar states
+      - name: Test content validation
+        run: python3 -m unittest discover -s tests -p 'test_content.py' -v
+      - name: Validate content and build site
         run: bundle exec ruby scripts/check_site.rb

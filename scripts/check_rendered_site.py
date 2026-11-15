@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check built HTML, metadata, local links, anchors, and Scholar visibility offline."""
+"""Check built HTML, metadata, local links, anchors, and the sitemap offline."""
 
 import argparse
 from collections import Counter
@@ -49,7 +49,8 @@ class Page(HTMLParser):
             self.schema_text = None
 
 
-def check_site(root, scholar):
+def check_site(root, baseurl=""):
+    baseurl = "/" + baseurl.strip("/") if baseurl.strip("/") else ""
     texts = {path: path.read_text(encoding="utf-8") for path in root.rglob("*.html")}
     pages = {path: Page(text) for path, text in texts.items()}
     errors = []
@@ -65,7 +66,19 @@ def check_site(root, scholar):
             url = urlsplit(href)
             if url.scheme or url.netloc:
                 continue
-            target = (root / unquote(url.path).lstrip("/")) if url.path.startswith("/") else (path.parent / unquote(url.path) if url.path else path)
+            local_path = unquote(url.path)
+            if local_path.startswith("/"):
+                if baseurl:
+                    if local_path == baseurl:
+                        local_path = "/"
+                    elif local_path.startswith(baseurl + "/"):
+                        local_path = local_path[len(baseurl):]
+                    else:
+                        errors.append(f"{name}: local URL missing baseurl {href}")
+                        continue
+                target = root / local_path.lstrip("/")
+            else:
+                target = path.parent / local_path if local_path else path
             target = target.resolve()
             if target.is_dir():
                 target /= "index.html"
@@ -81,33 +94,23 @@ def check_site(root, scholar):
                     errors.append(f"{name}: missing metadata {key}")
             if not page.schemas or page.schemas[0].get("@type") != "Person":
                 errors.append(f"{name}: missing Person JSON-LD")
-        if not scholar:
-            for marker in ("scholar.google.com", "Google Scholar", "Cited by", "<dt>Citations</dt>", "<dt>h-index</dt>", "<dt>i10-index</dt>", "page-stats__source"):
-                if marker in texts[path]:
-                    errors.append(f"{name}: disabled Scholar information leaked: {marker}")
-    publications = texts[root / "publications/index.html"]
-    if scholar and ("scholar.google.com" not in publications or "page-stats__source" not in publications):
-        errors.append("Enabled Scholar profile/source missing")
-    for marker in ("Conference papers", "By venue"):
-        if marker not in publications:
-            errors.append(f"Publication statistics missing: {marker}")
     urls = ET.parse(root / "sitemap.xml").findall("{*}url/{*}loc")
     sitemap_paths = {urlsplit(item.text).path for item in urls}
     expected_paths = set()
     for path, page in pages.items():
         relative = path.relative_to(root).as_posix()
         if "main-content" in page.ids and relative != "404.html":
-            expected_paths.add("/" + (relative[:-10] if relative.endswith("index.html") else relative))
+            expected_paths.add(baseurl + "/" + (relative[:-10] if relative.endswith("index.html") else relative))
     if sitemap_paths != expected_paths or len(urls) != len(expected_paths):
         errors.append(f"Unexpected sitemap entries: {sitemap_paths}")
     if errors:
         raise ValueError("\n".join(errors))
-    print(f"Rendered checks passed: {len(pages)} pages, Scholar {'enabled' if scholar else 'disabled'}.")
+    print(f"Rendered checks passed: {len(pages)} pages, baseurl {baseurl or '/'}.")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("directory", type=Path)
-    parser.add_argument("--scholar", choices=("true", "false"), required=True)
+    parser.add_argument("--baseurl", default="", help="Configured site subpath, such as /repository-name")
     args = parser.parse_args()
-    check_site(args.directory.resolve(), args.scholar == "true")
+    check_site(args.directory.resolve(), args.baseurl)

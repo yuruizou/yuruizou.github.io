@@ -12,6 +12,21 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class NewsContentTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        result = subprocess.run(
+            ["ruby", "-ryaml", "-rjson", "-e",
+             "print JSON.generate(YAML.load_file(ARGV.fetch(0)))",
+             str(ROOT / "_data/publications.yml")],
+            text=True, capture_output=True, check=True,
+        )
+        publications = json.loads(result.stdout)
+        papers = [paper for group in ("conference", "journal", "preprints")
+                  for paper in publications.get(group, [])]
+        if not papers:
+            raise AssertionError("Content reference tests require at least one publication")
+        cls.paper_id = papers[0]["id"]
+
     def check_news(self, news):
         with tempfile.TemporaryDirectory() as directory:
             fixture = Path(directory)
@@ -23,7 +38,7 @@ class NewsContentTests(unittest.TestCase):
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(ROOT / relative, target)
             home = {
-                "selected_publications": ["werewolf"],
+                "selected_publications": [self.paper_id],
                 "research": {"interests": []},
                 "news": [news],
             }
@@ -36,11 +51,11 @@ class NewsContentTests(unittest.TestCase):
             )
 
     def test_compact_copy_is_optional(self):
-        result = self.check_news({"text": "[WEREWOLF][paper:werewolf]"})
+        result = self.check_news({"text": f"[Paper][paper:{self.paper_id}]"})
         self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_compact_copy_can_reference_a_known_paper(self):
-        result = self.check_news({"text": "Full news", "home_text": "[Paper][paper:werewolf]"})
+        result = self.check_news({"text": "Full news", "home_text": f"[Paper][paper:{self.paper_id}]"})
         self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_unknown_compact_reference_is_rejected(self):
